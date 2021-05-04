@@ -1,0 +1,86 @@
+@()
+
+@main("The surprise for Chris!") {
+<div class="container mt-4">
+  <section class="mx-auto text-center" style="background-color: lightgrey;">
+    <h1 class="display-4">Hello friends!</h1>
+    <p class="lead text-muted"> As you probably now, Chris' birthday is coming up in July, along with his PhD defense!
+      </br>
+      The grad student life has been rough for him, and with the pandemic he feels extra lonely. </br>
+      For this reason, I thought that doing a public display of affection from everyone that cares about him
+      would be a great present!
+    </p>
+  </section>
+
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          So what is this about?
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          The idea is simple! We have 2 ways of sharing messages for Chris
+          <ul>
+            <li> A short video (less than 30 seconds!) of you talking to him. This will get played along with videos from
+              other people.</li>
+            <li> A digital postcard, where you upload a picture and a little message and I make it look cute with html magic.
+            </li>
+          </ul>
+          The plan is to collect your messages, pictures and videos by July 1st, so I have time to compile them and display
+          them nicely.        
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingTwo">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Mmm not sure I should send a message...
+        </button>
+      </h2>
+      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          I know Chris has impacted many people's lives, from very different paths, so as long
+          as you feel like saying something nice to him, you are very welcome to participate! It doesn't matter
+          if you haven't seen them in 15 years, or if you see him every day. Just share the love!
+        </div>       
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingThree">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Where can we see the end result?
+        </button>
+      </h2>
+      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          I would like to make this public for other people to see, but if you want to share something private and not have it
+          displayed, but you want Chris to see it, then when you upload it mark it as Private please!        
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingFour">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          Wait, who are you?
+        </button>
+      </h2>
+      <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          Hi I'm Javiera, Chris' wife!
+          If you don't know which Chris, then you're probably in the wrong website.  
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-4">
+    <div class="alert alert-primary mx-auto text-center" role="alert">
+      <h1 class="display-6"> Ready to send your message?</h1> 
+      <p>When you have your video and/or photo and text, please go to the following link to update it!</p>
+      <a class="btn btn-secondary" href="@routes.UploadController.get()">Upload!</a>
+    </div>
+  </div>
+</div>
+}
