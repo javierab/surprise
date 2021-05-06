@@ -1,6 +1,30 @@
 @import helper._
-@(name: String)(implicit request: RequestHeader, messagesProvider: MessagesProvider)
+@(id: String)(implicit request: RequestHeader, messagesProvider: MessagesProvider)
 
 @main("Message uploader") {
-hi @name
+
+<div class="container mt-4">
+  <h1 class="display-5">You are ready to upload!</h1>
+  <p> Please pick which option you want: a postcard or a video? </p>
+  <p> If you'd like to do both, please do one at a time.</p>
+
+  <section class="mx-auto text-center" style="background-color: lightgrey; padding: 5%;">
+    <h2 class="display-4">Postcard</h2>
+    @helper.form(action = routes.UploadController.upload, Symbol("enctype") -> "multipart/form-data") {
+      @inputFile(uploadImgForm("File"))
+      @textarea(uploadImgForm("Your message"))
+      @checkbox(uploadImgForm("Make private?"))
+      @CSRF.formField
+    <input class="btn btn-secondary" type="submit" id="upload" value="Upload picture"/>
+  }
+  </section>
+
+  <section class="mx-auto text-center" style="background-color: lightgrey; padding: 5%;">
+    <h2 class="display-4">Video</h2>
+    @helper.form(action = routes.UploadController.upload, Symbol("enctype") -> "multipart/form-data") {
+      @inputFile(uploadVidForm("File"))
+      @CSRF.formField
+    <input class="btn btn-secondary" type="submit" id="upload" value="Upload video"/>
+  }
+</section>
 }
