@@ -1,5 +1,23 @@
-@()
+@import helper._
+@(userForm: Form[User], error: Boolean = false)(implicit request: RequestHeader, messagesProvider: MessagesProvider)
 
-@main("File uploader") {
-  hi
+@main("Message uploader") {
+
+  @if(error){
+    <div id="error-alert" class="alert alert-secondary mx-auto text-center" role="alert">
+      <p>There was a problem! Please try again.</p>
+    </div>
+  }
+    <div class="container mt-4">
+      <h1 class="display-3">YAY!</h1>
+      <p> Thanks for your help! First please let me know who you are, so I can track what has been uploaded by you. </p>
+
+      @form(action = routes.UploadController.submit()) {
+        @CSRF.formField
+        @inputText(userForm("name"))
+        @inputText(userForm("email"))
+      
+        <input type="submit" value="Next">
+      }
+  </div>
 }

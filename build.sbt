@@ -11,6 +11,10 @@ libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test
 libraryDependencies += jdbc
 libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.24"
+libraryDependencies += "com.typesafe.play" %% "play-slick" % "5.0.0"
+libraryDependencies += "com.typesafe.slick" %% "slick" % "3.3.2"
+libraryDependencies += "com.typesafe.slick" %% "slick-codegen" % "3.3.2"
+
 
 mainClass in assembly := Some("play.core.server.ProdServerStart")
 fullClasspath in assembly += Attributed.blank(PlayKeys.playPackageAssets.value)
@@ -34,3 +38,27 @@ assemblyMergeStrategy in assembly := {
 
 // Adds additional packages into conf/routes
 // play.sbt.routes.RoutesKeys.routesImport += "com.javi.binders._"
+
+lazy val slick = taskKey[Seq[File]]("Generate Tables.scala")
+slick := {
+  val dir = (sourceDirectory in Compile) value
+  val outputDir = dir
+  val url = "jdbc:mysql://localhost:3306/surprise" // connection info
+  val user = "root"
+  val password = "p4ssw0rd"
+  val jdbcDriver = "com.mysql.cj.jdbc.Driver"
+  val slickDriver = "slick.jdbc.MySQLProfile"
+  val pkg = "models"
+
+  val cp = (dependencyClasspath in Compile) value
+  val s = streams value
+
+  runner.value.run("slick.codegen.SourceCodeGenerator",
+    cp.files,
+    Array(slickDriver, jdbcDriver, url, outputDir.getPath, pkg, user, password),
+    s.log).failed foreach (sys error _.getMessage)
+
+  val file = outputDir / pkg / "Tables.scala"
+
+  Seq(file)
+}
