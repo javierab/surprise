@@ -1,0 +1,14 @@
+@(id: Int)(implicit request: RequestHeader, messagesProvider: MessagesProvider)
+
+@main("Done") {
+<div class="container mt-4 .col-sm-6.">
+  <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+
+  <section class="mx-auto text-center" style="background-color: lightgrey; padding: 5%;">
+    <h1 class="display-3">You are awesome!</h1>
+    <p class="lead text-muted"> Thanks for submitting your message to Chris! I'm sure he will be very excited to see the videos and read all the messages.</p>
+    <p class="lead text-muted">If you want to upload another video/picture <a href="@routes.UploadController.renderUpload(id)""> click here! </a> </p>
+  </section>
+  </main>
+</div>
+}

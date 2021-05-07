@@ -2,36 +2,36 @@ package models
 
 import play.api.data.Form
 import play.api.data.Forms._
+import views.html.helper.textarea
 
 case class User(name: String, email: String) 
 object User {
 
   val form: Form[User] = Form(
     mapping(
-      "name" -> nonEmptyText,
-      "email" -> email
+      "Name" -> nonEmptyText,
+      "Email" -> email,
     )(User.apply)(User.unapply)
       )
 }
 
-case class UploadImgForm(message: String, isPrivate: Boolean)
+case class UploadForm(file: String)
+object UploadForm {
 
-object UploadImgForm {
-
-  val form: Form[UploadImgForm] = Form(
+  val form: Form[UploadForm] = Form(
     mapping(
-      "message" -> nonEmptyText,
-      "isPrivate" -> boolean
-    )(UploadImgForm.apply)(UploadImgForm.unapply)
-      )
+      "File" -> nonEmptyText
+    )(UploadForm.apply)(UploadForm.unapply)
+  )
 }
 
-case class UploadVidForm(name: String)
-object UploadVidForm {
+case class Message(message: Option[String], isPrivate: String) 
+object Message {
 
-  val form: Form[UploadVidForm] = Form(
+  val form: Form[Message] = Form(
     mapping(
-      "name" -> nonEmptyText,
-    )(UploadVidForm.apply)(UploadVidForm.unapply)
-      )
+      "Your message" -> optional(text),
+      "Privacy" -> nonEmptyText
+    )(Message.apply)(Message.unapply)
+  )
 }

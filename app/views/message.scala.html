@@ -1,0 +1,35 @@
+@import helper._
+@(form: Form[models.Message], id: Int, fid: Int)(implicit request: RequestHeader, messagesProvider: MessagesProvider)
+
+
+@main("Message uploader") {
+
+<div class="container mt-6 .col-sm-6.">
+<main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+
+  @if(form.hasGlobalErrors) {
+    <ul>
+    @for(error <- form.globalErrors) {
+      <li>@error.format</li>
+    }
+    </ul>
+  }
+
+  <h1 class="display-5">Now you can enter your message!</h1>
+  <p class="lead text-muted"> The message will appear along your picture/video and name. If you make it private, only Chris will see your message.</p>
+  <p class="lead text-muted"> You can also choose not to write a message, but I encourage you to do so! </p>
+  <p class="lead text-muted"> Just in case the upload fails, please be sure to copy/paste the text before submitting. </p>
+
+  <section class="mx-auto" style="background-color: lightgray; padding: 5%;">
+    <h2 class="display-8 text-center">Your message </h2>
+    <div class="mb-3">
+    @helper.form(action = routes.UploadController.message(id, fid), Symbol("class") -> "form-group") {
+      @CSRF.formField
+      @textarea(form("Message"), Symbol("class") -> "form-control", Symbol("rows") -> 6)
+      @inputRadioGroup(form("Privacy"), Seq("Public" -> "Public", "Private" -> "Private"), Symbol("_label") -> "", Symbol("_showConstraints") -> false, Symbol("class") -> "custom-control custom-control-inline")
+      <input class="btn btn-primary" type="submit" id="upload" value="Send"/>
+    </div>
+  }
+</section>
+</main>
+}

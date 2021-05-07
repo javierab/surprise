@@ -8,16 +8,24 @@
       <p>There was a problem! Please try again.</p>
     </div>
   }
-    <div class="container mt-4">
+  <div class="container mt-6 .col-sm-6.">
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
       <h1 class="display-3">YAY!</h1>
-      <p> Thanks for your help! First please let me know who you are, so I can track what has been uploaded by you. </p>
+      <p class="lead text-muted"> Thanks for your help! First, please let me know who you are, so I can track what has been uploaded by you, and reach out to you if there is any issue with your upload. </p>
+      <p class="lead text-muted"> <strong>Note:</strong> This is the name Chris will see your message associated with!</p>
 
-      @form(action = routes.UploadController.submit()) {
-        @CSRF.formField
-        @inputText(userForm("name"))
-        @inputText(userForm("email"))
-      
-        <input type="submit" value="Next">
-      }
+      <section class="mx-auto text-center" style="background-color: lightgray; padding: 5%;">
+
+        @form(action = routes.UploadController.submit) {
+          @CSRF.formField
+          <div class="mb-3">
+          @inputText(userForm("Name"), Symbol("class") -> "lead form-label form-control font-weight-normal", Symbol("_showConstraints") -> false)
+          @inputText(userForm("Email"), Symbol("class") -> "lead form-label form-control", Symbol("_showConstraints") -> false)
+        </div>
+          <input class="btn btn-primary" type="submit" value="Next">
+        }
+      </section>
+      <p class="text-muted"><small> I promise not to sell your email, so please make sure I can actually contact you if needed, and to let you know when the website with the pictures and videos is live</small></p>
+    </main>
   </div>
 }
