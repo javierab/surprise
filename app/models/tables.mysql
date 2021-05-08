@@ -9,10 +9,10 @@ create table user_file(
   filename varchar(300) not null, 
   foreign key (user_id) references user(id));
 
-create table user_message(
+create table message(
   id int not null,
   fid int not null,
-  message longtext null,
+  text longtext null,
   private boolean not null default false,
   foreign key (id) references user(id),
   foreign key (fid) references user_file(id)

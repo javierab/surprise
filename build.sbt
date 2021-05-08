@@ -6,14 +6,18 @@ version := "1.0-SNAPSHOT"
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 scalaVersion := "2.13.5"
+val AkkaVersion = "2.5.31"
+val AkkaHttpVersion = "10.1.11"
 
-libraryDependencies += guice
-libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test
-libraryDependencies += jdbc
-libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.24"
-libraryDependencies += "com.typesafe.play" %% "play-slick" % "5.0.0"
-libraryDependencies += "com.typesafe.slick" %% "slick" % "3.3.2"
-libraryDependencies += "com.typesafe.slick" %% "slick-codegen" % "3.3.2"
+libraryDependencies ++= Seq(
+    guice,
+    "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test,
+    jdbc,
+    "mysql" % "mysql-connector-java" % "8.0.24",
+    "com.github.seratch" %% "awscala-s3" % "0.8.+",
+    "com.typesafe.play" %% "play-slick" % "5.0.0",
+    "com.typesafe.slick" %% "slick" % "3.3.2",
+    "com.typesafe.slick" %% "slick-codegen" % "3.3.2")
 
 scalacOptions ++= Seq(
   "-feature",

@@ -4,14 +4,14 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index()
+GET     /                           controllers.HomeController.index
 
 # Get the upload page
-GET    /upload                     controllers.UploadController.renderUser
-POST   /upload                     controllers.UploadController.submit
+GET    /upload                      controllers.UploadController.renderUser
+POST   /upload                      controllers.UploadController.submit
 
-GET    /upload-file                controllers.UploadController.renderUpload(id: Int)
-POST   /upload-file                controllers.UploadController.upload(id: Int)
+GET    /upload-file                 controllers.UploadController.renderUpload(id: Int)
+POST   /upload-file                 controllers.UploadController.upload(id: Int)
 
 GET    /upload-message              controllers.UploadController.renderMessage(id: Int, fId: Int)
 POST   /upload-message              controllers.UploadController.message(id: Int, fId: Int)

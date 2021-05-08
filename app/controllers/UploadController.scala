@@ -31,11 +31,12 @@ import scala.concurrent.duration.Duration
 case class FormData(name: String)
 
 @Singleton
-class UploadController @Inject() (protected val dbConfigProvider: DatabaseConfigProvider, cc: ControllerComponents)(
+class UploadController @Inject() (protected val dbConfigProvider: DatabaseConfigProvider, cc: ControllerComponents, config: Configuration)(
     implicit ec: ExecutionContext, assetsFinder: AssetsFinder) extends AbstractController(cc)
     with HasDatabaseConfigProvider[JdbcProfile] with play.api.i18n.I18nSupport{
   
   import dbConfig.profile.api._
+  val path = config.get[String]("file_path")
 
   def renderUser = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.uploader(User.form))
@@ -88,7 +89,7 @@ class UploadController @Inject() (protected val dbConfigProvider: DatabaseConfig
         //save filename and user to db
         val files = TableQuery[Tables.UserFile]
 
-        file.ref.copyTo(Paths.get(s"/tmp/uploads/$filename"), replace = false)
+        file.ref.copyTo(Paths.get(s"$path/$filename"), replace = false)
         val fid : Future[Int] = db.run((files returning files.map(_.id)) += Tables.UserFileRow(0, id, filename.toString))
           
         Await.ready(fid, Duration(20, "seconds")) 
@@ -107,13 +108,12 @@ class UploadController @Inject() (protected val dbConfigProvider: DatabaseConfig
         },
         m => {
           val messages = TableQuery[Tables.Message]
-          val privacy = if(m.isPrivate=="Private") true else false
+          val privacy = if(m.isPrivate=="private") true else false
 
           db.run(messages += Tables.MessageRow(id, fId, m.message, privacy))
               .map(_ => Redirect(routes.UploadController.done(id)))        
         }
     )
   }
-
 
 }
