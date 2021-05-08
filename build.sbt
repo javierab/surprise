@@ -14,7 +14,6 @@ libraryDependencies ++= Seq(
     "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test,
     jdbc,
     "mysql" % "mysql-connector-java" % "8.0.24",
-    "com.github.seratch" %% "awscala-s3" % "0.8.+",
     "com.typesafe.play" %% "play-slick" % "5.0.0",
     "com.typesafe.slick" %% "slick" % "3.3.2",
     "com.typesafe.slick" %% "slick-codegen" % "3.3.2")
@@ -29,6 +28,8 @@ mainClass in assembly := Some("play.core.server.ProdServerStart")
 fullClasspath in assembly += Attributed.blank(PlayKeys.playPackageAssets.value)
 
 assemblyMergeStrategy in assembly := {
+  case PathList("META-INF", "eclipse.inf") => MergeStrategy.last
+  case "module-info.class" => MergeStrategy.discard
   case manifest if manifest.contains("MANIFEST.MF") =>
     // We don't need manifest files since sbt-assembly will create
     // one with the given settings
