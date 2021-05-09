@@ -12,7 +12,7 @@ create table user_file(
 create table message(
   id int not null,
   fid int not null,
-  text longtext null,
+  message longtext null,
   private boolean not null default false,
   foreign key (id) references user(id),
   foreign key (fid) references user_file(id)

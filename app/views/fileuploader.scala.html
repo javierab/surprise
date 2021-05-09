@@ -11,6 +11,7 @@
   <p class="lead text-muted"> If you'd like to upload multiple items, please do one at a time.</p>
 
   <section class="mx-auto text-center" style="background-color: lightgray; padding: 5%;">
+    <p class="bg-warning"> PLEASE CLICK UPLOAD ONLY ONCE! EVEN IF IT TAKES A WHILE TO UPLOAD! </p>
     @helper.form(action = routes.UploadController.upload(userId), Symbol("enctype") -> "multipart/form-data", Symbol("class") -> "form-label") {
       @CSRF.formField
       @inputFile(form("File"), Symbol("class") -> "form-label", Symbol("_label") -> "Select File (10 MB max)", Symbol("_showConstraints") -> false)
