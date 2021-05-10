@@ -25,7 +25,7 @@
     <div class="mb-3">
     @helper.form(action = routes.UploadController.message(id, fid), Symbol("class") -> "form-group") {
       @CSRF.formField
-      @textarea(form("Message"), Symbol("class") -> "form-control", Symbol("rows") -> 6)
+      @textarea(form("Your message"), Symbol("class") -> "form-control", Symbol("rows") -> 6)
       @inputRadioGroup(form("Privacy"), Seq("public" -> "Public", "private" -> "Private"), Symbol("_label") -> "", Symbol("_showConstraints") -> false, Symbol("class") -> "custom-control custom-control-inline")
       <input class="btn btn-primary" type="submit" id="upload" value="Send"/>
     </div>

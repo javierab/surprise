@@ -25,12 +25,12 @@ object UploadForm {
   )
 }
 
-case class Message(message: Option[String], isPrivate: String) 
+case class Message(message: String, isPrivate: String) 
 object Message {
 
   val form: Form[Message] = Form(
     mapping(
-      "Your message" -> optional(text),
+      "Your message" -> text,
       "Privacy" -> nonEmptyText
     )(Message.apply)(Message.unapply)
   )

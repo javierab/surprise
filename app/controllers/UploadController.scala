@@ -110,7 +110,7 @@ class UploadController @Inject() (protected val dbConfigProvider: DatabaseConfig
           val messages = TableQuery[Tables.Message]
           val privacy = if(m.isPrivate=="private") true else false
 
-          db.run(messages += Tables.MessageRow(id, fId, m.message, privacy))
+          db.run(messages += Tables.MessageRow(id, fId, Some(m.message), privacy))
               .map(_ => Redirect(routes.UploadController.done(id)))        
         }
     )
