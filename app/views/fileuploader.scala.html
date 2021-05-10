@@ -14,7 +14,7 @@
     <p class="bg-warning"> PLEASE CLICK UPLOAD ONLY ONCE! EVEN IF IT TAKES A WHILE TO UPLOAD! </p>
     @helper.form(action = routes.UploadController.upload(userId), Symbol("enctype") -> "multipart/form-data", Symbol("class") -> "form-label") {
       @CSRF.formField
-      @inputFile(form("File"), Symbol("class") -> "form-label", Symbol("_label") -> "Select File (10 MB max)", Symbol("_showConstraints") -> false)
+      @inputFile(form("File"), Symbol("class") -> "form-label", Symbol("_label") -> "Select File (20 MB max)", Symbol("_showConstraints") -> false)
 
     <input class="btn btn-primary" type="submit" id="upload" value="Upload file"/>
   }

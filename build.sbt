@@ -1,7 +1,7 @@
 name := """bday-messages"""
 organization := "com.javi"
 
-version := "1.0-SNAPSHOT"
+version := "1.1"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
