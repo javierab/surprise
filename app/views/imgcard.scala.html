@@ -2,7 +2,7 @@
 
   <div class="col-sm-6">
     <div class="card" style="width: 18rem;">
-      <img src="@card.filepath" class="card-img-top" alt="Picture from @card.name">
+      <img src="@routes.DisplayController.imageFromName(card.filepath)" class="card-img-top" alt="Picture from @card.name">
       <div class="card-body">
         <footer class="blockquote-footer"> from @card.name </footer>
       </div>

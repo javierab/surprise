@@ -9,10 +9,16 @@ import play.api._
 import play.api.mvc._
 import play.api.db._
 import play.api.db.slick._
+import play.api.http.HttpEntity
 import _root_.slick.jdbc.JdbcProfile
+import akka.stream.scaladsl.FileIO
+
+import java.io.{File, FileInputStream}
+import java.nio.file.{Files, Path}
 
 import scala.util.{Try, Success, Failure}
 import scala.concurrent.{ExecutionContext, Future}
+import akka.util.ByteString
 
 @Singleton
 class DisplayController @Inject() (protected val dbConfigProvider: DatabaseConfigProvider, cc: ControllerComponents, config: Configuration)(
@@ -21,6 +27,18 @@ class DisplayController @Inject() (protected val dbConfigProvider: DatabaseConfi
   
   import dbConfig.profile.api._
   val path = config.get[String]("file_path")
+
+  def getFileType(name: String) : String = name.substring(name.lastIndexOf(".")+1, name.length)
+
+  def imageFromName(name: String) = Action {
+    val imageFile = new File(s"$path/$name")
+    if(imageFile.exists()) {
+      Ok.sendFile(imageFile)
+    }
+    else{
+      NotFound("File not found:" + name)
+    }
+  }
 
     
   def displayImages = Action.async { implicit request =>
@@ -40,7 +58,7 @@ class DisplayController @Inject() (protected val dbConfigProvider: DatabaseConfi
     db.run(cQuery.result)
       .map(ccFut => ccFut
                       .filter(f => f._2.endsWith("png") || f._2.endsWith("jpg") || f._2.endsWith("jpeg"))
-                      .map(c => Card(c._1, s"$path/${c._2}", c._3)))
+                      .map(c => Card(c._1, c._2, c._3)))
       .map(futCards => Ok(views.html.cards(futCards)))
     
     
