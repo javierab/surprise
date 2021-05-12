@@ -1,0 +1,18 @@
+@(cards: Seq[Card])(implicit request: RequestHeader, messagesProvider: MessagesProvider)
+
+@main("Pictures display") {
+  <div class="container mt-4 .col-sm-6.">
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+  
+    <section class="mx-auto text-center" style="background-color: lightgrey; padding: 5%;">
+      <h1 class="display-3">Gallery</h1>
+        <div class="row">
+          @for(card <- cards){
+            @views.html.imgcard(card)
+          }
+        </div>
+      </div>
+    </section>
+    </main>
+  </div>
+}
